@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="300dp"
+    android:layout_margin="@dimen/margin5"
+    android:layout_marginRight="@dimen/margin10"
+    android:elevation="@dimen/margin3"
+    android:background="@drawable/rounded_rectangle_orange"
+    android:backgroundTint="@color/white"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+<!--        <de.hdodenhof.circleimageview.CircleImageView-->
+<!--            android:layout_width="@dimen/image40"-->
+<!--            android:layout_height="@dimen/image40"-->
+<!--            android:background="@drawable/avater">-->
+<!--        </de.hdodenhof.circleimageview.CircleImageView>-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin10"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/blogUploaderName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:text="@string/app_name"
+                android:textStyle="bold"
+                android:maxLines="1"
+                android:paddingStart="@dimen/margin10"
+                android:layout_gravity="center"
+                android:textSize="@dimen/text_size18"
+                android:textColor="@color/black"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/margin5">
+
+        <ImageView
+            android:id="@+id/thumbnail_blog"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/margin5">
+
+            <TextView
+                android:id="@+id/blog_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:paddingStart="@dimen/margin10"
+                android:paddingEnd="@dimen/margin10"
+                android:layout_weight="1"
+                android:textSize="@dimen/text_size14"
+                android:maxLines="2"
+                android:textColor="@color/black"/>
+
+<!--        <ImageView-->
+<!--            android:id="@+id/thumbnail_blog"-->
+<!--            android:layout_width="80dp"-->
+<!--            android:layout_height="80dp"-->
+<!--            android:padding="@dimen/margin5" />-->
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin5"
+        android:paddingStart="@dimen/margin10"
+        android:paddingEnd="@dimen/margin10"
+        android:layout_marginBottom="@dimen/margin10">
+
+        <TextView
+            android:id="@+id/blog_posted_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/access_time_black"
+            android:drawableTint="@color/tint_color"
+            android:drawablePadding="@dimen/margin10"
+            android:gravity="start|center"
+            android:text="20 JUN 20"
+            android:textSize="@dimen/text_size12"
+            android:textColor="@color/text_light"/>
+    </LinearLayout>
+</LinearLayout>

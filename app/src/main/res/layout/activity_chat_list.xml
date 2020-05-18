@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:background="@drawable/dashboard"
+    tools:context=".ui.chat.ChatListActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/chatListToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"/>
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+
+    <LinearLayout
+        android:layout_below="@+id/chatListToolbar"
+        android:layout_width="match_parent"
+        android:background="@null"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/no_data_layout"
+            layout="@layout/no_data_layout"
+            android:visibility="gone"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/chatListRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:itemCount="5"
+        android:background="@null"
+        tools:listitem="@layout/custom_chat_list_card"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="@dimen/margin50"
+        android:layout_height="@dimen/margin50"
+        android:layout_alignRight="@+id/chatListRecyclerView"
+        android:layout_alignParentBottom="true"
+        android:backgroundTint="@color/tint_color"
+        android:layout_marginEnd="@dimen/margin10"
+        android:layout_marginBottom="@dimen/margin10"
+        android:tint="@color/white"
+        app:srcCompat="@drawable/chat_bubble_black"
+        android:onClick="showMoreClicked"/>
+    </LinearLayout>
+</RelativeLayout>
