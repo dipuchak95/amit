@@ -1,23 +1,26 @@
 package com.sumit.ibox.ui.teacher;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import com.sumit.ibox.common.FilePath;
-import com.sumit.ibox.model.AlertDialog;
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
-import com.sumit.ibox.model.ProgressDialog;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.ImageDecoder;
+import android.media.Image;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.util.Size;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -27,10 +30,18 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import com.android.volley.RequestQueue;
 import com.sumit.ibox.R;
 import com.sumit.ibox.common.Constant;
+import com.sumit.ibox.common.FilePath;
 import com.sumit.ibox.common.Utils;
+import com.sumit.ibox.model.AlertDialog;
+import com.sumit.ibox.model.ProgressDialog;
 
 import org.json.JSONObject;
 
@@ -38,9 +49,12 @@ import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileDescriptor;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -71,7 +85,7 @@ public class AcademicsUpload extends AppCompatActivity {
 
     static int academicsType = Constant.ACADEMICS_HOMEWORK;
 
-    String selectedDate;
+    String selectedDate = "Submission";
     AlertDialog errorDialog, responseDialog;
     ProgressDialog loading;
     String institutionId;
@@ -84,7 +98,10 @@ public class AcademicsUpload extends AppCompatActivity {
     String descriptionString;
     String homeworkDateString;
     String submissionDateString;
-    Bitmap imageBitmap;
+    static Bitmap imageBitmap;
+
+    //camera
+    Uri outputFileUri;
 
     String examName;
     RequestQueue rQueue;
@@ -93,11 +110,11 @@ public class AcademicsUpload extends AppCompatActivity {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             academicsType = position;
-            if(position == Constant.ACADEMICS_HOMEWORK || position == Constant.ACADEMICS_ASSIGNMENT){
+            if (position == Constant.ACADEMICS_HOMEWORK || position == Constant.ACADEMICS_ASSIGNMENT) {
                 homeWorkLayout.setVisibility(View.VISIBLE);
                 syllabusLayout.setVisibility(View.GONE);
                 notesLayout.setVisibility(View.GONE);
-            }else if(position == Constant.ACADEMICS_SYLLABUS || position == Constant.ACADEMICS_NOTES){
+            } else if (position == Constant.ACADEMICS_SYLLABUS || position == Constant.ACADEMICS_NOTES) {
                 homeWorkLayout.setVisibility(View.GONE);
                 syllabusLayout.setVisibility(View.VISIBLE);
                 notesLayout.setVisibility(View.GONE);
@@ -156,7 +173,7 @@ public class AcademicsUpload extends AppCompatActivity {
         homeWorkLayout = findViewById(R.id.academics_homework_layout);
         syllabusLayout = findViewById(R.id.academics_syllabus_layout);
         notesLayout = findViewById(R.id.academics_notes_layout);
-       /**toolbar setup*/
+        /**toolbar setup*/
         homeWorkToolbarUpload = findViewById(R.id.upload_homework_toolbar);
         homeWorkToolbarUpload.setTitle(R.string.upload_homework_upload);
         homeWorkToolbarUpload.setTitleTextColor(getResources().getColor(R.color.white));
@@ -180,7 +197,7 @@ public class AcademicsUpload extends AppCompatActivity {
         image = findViewById(R.id.homework_image);
 
         etExamName = findViewById(R.id.syllabus_exam_name);
-        etSubject  = findViewById(R.id.syllabus_subject);
+        etSubject = findViewById(R.id.syllabus_subject);
         syllabusClass = findViewById(R.id.syllabus_class_spinner);
         syllabusDiv = findViewById(R.id.syllabus_division_spinner);
         addSyllabus = findViewById(R.id.add_syllabus);
@@ -212,34 +229,36 @@ public class AcademicsUpload extends AppCompatActivity {
 
     private void setupDatePicker() {
         final Calendar c = Calendar.getInstance();
-        int mYear = c.get(Calendar.YEAR); // current year
-        int mMonth = c.get(Calendar.MONTH); // current month
-        int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
-        lastDate.setText(mDay+"");
-        String month = Utils.getMonthFromNo(mMonth+1);
+        final int mYear = c.get(Calendar.YEAR); // current year
+        final int mMonth = c.get(Calendar.MONTH); // current month
+        final int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
+        //lastDate.setText(mDay + "");
+        lastDate.setText("?");
+
+        String month = Utils.getMonthFromNo(mMonth + 1);
         lastMonthYear.setText(month + " " + mYear);
-        datePickerDialog  = new DatePickerDialog(this,
+        datePickerDialog = new DatePickerDialog(this,
                 new DatePickerDialog.OnDateSetListener() {
 
                     @Override
                     public void onDateSet(DatePicker view, int year,
                                           int monthOfYear, int dayOfMonth) {
-                        selectedDate = year+"-"+String.format("%02d", monthOfYear+1)+"-"+
+                        selectedDate = year + "-" + String.format("%02d", monthOfYear + 1) + "-" +
                                 String.format("%02d", dayOfMonth);
-                        lastDate.setText(dayOfMonth+"");
-                        String month = Utils.getMonthFromNo(monthOfYear+1);
+                        lastDate.setText(dayOfMonth + "");
+                        String month = Utils.getMonthFromNo(monthOfYear + 1);
                         lastMonthYear.setText(month + " " + year);
                     }
                 }, mYear, mMonth, mDay);
-
     }
 
-    private void showPictureDialog(){
+    private void showPictureDialog() {
         android.app.AlertDialog.Builder pictureDialog = new android.app.AlertDialog.Builder(this);
         pictureDialog.setTitle("Select Action");
         String[] pictureDialogItems = {
                 "Select photo from gallery",
-                "Capture photo from camera" };
+                "Capture photo from camera"
+                };
         pictureDialog.setItems(pictureDialogItems,
                 new DialogInterface.OnClickListener() {
                     @Override
@@ -264,11 +283,18 @@ public class AcademicsUpload extends AppCompatActivity {
     }
 
     private void takePhotoFromCamera() {
-        Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(cameraIntent, Constant.CODE_CAMERA);
+
+        ContentValues values = new ContentValues(1);
+        values.put(MediaStore.Images.Media.MIME_TYPE, "image/png");
+        outputFileUri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+
+        Intent captureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        captureIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+        captureIntent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
+        startActivityForResult(captureIntent, Constant.CODE_CAMERA);
     }
 
-    private void openFileChooser(){
+    private void openFileChooser() {
         Intent chooseFile;
         Intent intent;
         chooseFile = new Intent(Intent.ACTION_GET_CONTENT);
@@ -279,15 +305,15 @@ public class AcademicsUpload extends AppCompatActivity {
     }
 
     public String getRealPathFromURI(Uri contentUri) {
-        String [] proj      = {MediaStore.Images.Media.DATA};
-        Cursor cursor       = getContentResolver().query( contentUri, proj, null, null,null);
+        String[] proj = {MediaStore.Images.Media.DATA};
+        Cursor cursor = getContentResolver().query(contentUri, proj, null, null, null);
         if (cursor == null) return null;
-        int column_index    = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
         cursor.moveToFirst();
         return cursor.getString(column_index);
     }
 
-    public File getFileFromBitmap(Bitmap bitmap, String filename){
+    public File getFileFromBitmap(Bitmap bitmap, String filename) {
         loading.show();
         File f = new File(context.getCacheDir(), filename);
         Utils.logPrint(getClass(), "FILE_1", f.toString());
@@ -296,7 +322,7 @@ public class AcademicsUpload extends AppCompatActivity {
 
             //Convert bitmap to byte array
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.PNG, 80 /*ignored for PNG*/, bos);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100 /*ignored for PNG*/, bos);
             byte[] bitmapdata = bos.toByteArray();
 
             //write the bytes in file
@@ -305,8 +331,8 @@ public class AcademicsUpload extends AppCompatActivity {
             fos.flush();
             fos.close();
             Utils.logPrint(getClass(), "FILE_2", f.toString());
-        }catch (Exception e){
-            Log.println(Log.ASSERT,"Image compression error",Log.getStackTraceString(e));
+        } catch (Exception e) {
+            Log.println(Log.ASSERT, "Image compression error", Log.getStackTraceString(e));
         }
         loading.dismiss();
         return f;
@@ -328,18 +354,52 @@ public class AcademicsUpload extends AppCompatActivity {
                     imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), contentURI);
                     image.setImageBitmap(imageBitmap);
                 } catch (IOException e) {
-                    Utils.logPrint(getClass(),"Image error",Log.getStackTraceString(e));
+                    Utils.logPrint(getClass(), "Image error", Log.getStackTraceString(e));
                 }
             }
 
-        } else if (requestCode == Constant.CODE_CAMERA) {
-            imageBitmap = (Bitmap) data.getExtras().get("data");
-            image.setImageBitmap(imageBitmap);
-            long timeMillis = System.currentTimeMillis();
-            teacherId = Utils.getString(context, Constant.KEY_USER_ID, Constant.DUMMY);
-            String fileName = teacherId + timeMillis + "_homework.png";
-            homework = getFileFromBitmap(imageBitmap,fileName);
-        } else if(requestCode == Constant.CODE_FILES){
+        }
+        else if (requestCode == Constant.CODE_CAMERA) {
+            //bug in previous android versions
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                Uri contentURI = outputFileUri;
+                String path = getRealPathFromURI(contentURI);
+                homework = new File(path);
+                //getBitmap was depreciated in API 29 (Android Q)
+                try {
+                    //loadThumbnail() working for Build.VERSION_CODES.Q and up
+                    imageBitmap = getApplicationContext().getContentResolver().loadThumbnail(contentURI, new Size(640, 480), null);
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                image.setImageBitmap(imageBitmap);
+            }
+            else if (Build.VERSION.SDK_INT == Build.VERSION_CODES.P) {
+                Uri contentURI = outputFileUri;
+                String path = getRealPathFromURI(contentURI);
+                homework = new File(path);
+                try {
+                    //createSource requires at least API 28 (Android P)
+                    imageBitmap = ImageDecoder.decodeBitmap(ImageDecoder.createSource(this.getContentResolver(), contentURI));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                image.setImageBitmap(imageBitmap);
+            }
+            else {  //for the rest Android Versions
+                Uri contentURI = outputFileUri;
+                String path = getRealPathFromURI(contentURI);
+                homework = new File(path);
+                try {
+                    imageBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), contentURI);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                image.setImageBitmap(imageBitmap);
+            }
+        }
+        else if (requestCode == Constant.CODE_FILES) {
             Utils.logPrint(getClass(), "data", data.toString());
             Uri fileUri = data.getData();
             Utils.logPrint(getClass(), "getEncodedPath", fileUri.getEncodedPath());
@@ -347,8 +407,8 @@ public class AcademicsUpload extends AppCompatActivity {
             try {
                 String filePath = FilePath.getPath(context, fileUri);//getRealPathFromURI(fileUri);
                 syllabus = new File(filePath);
-            }catch(Exception e){
-                syllabus = new File(Environment.getExternalStorageDirectory()+fileUri.getPath());
+            } catch (Exception e) {
+                syllabus = new File(Environment.getExternalStorageDirectory() + fileUri.getPath());
             }
             Utils.logPrint(getClass(), "getAbsolutePath", syllabus.getAbsolutePath());
             Utils.logPrint(getClass(), "toString", syllabus.toString());
@@ -361,9 +421,9 @@ public class AcademicsUpload extends AppCompatActivity {
         institutionId = Utils.getString(context, Constant.KEY_INSTITUTION_ID, Constant.DUMMY);
         teacherId = Utils.getString(context, Constant.KEY_USER_ID, Constant.DUMMY);
         session = Utils.getString(context, Constant.KEY_SESSION, Constant.DUMMY);
-        if(academicsType == Constant.ACADEMICS_HOMEWORK || academicsType == Constant.ACADEMICS_ASSIGNMENT){
+        if (academicsType == Constant.ACADEMICS_HOMEWORK || academicsType == Constant.ACADEMICS_ASSIGNMENT) {
             validateHomeWork();
-        }else if(academicsType == Constant.ACADEMICS_SYLLABUS || academicsType == Constant.ACADEMICS_NOTES){
+        } else if (academicsType == Constant.ACADEMICS_SYLLABUS || academicsType == Constant.ACADEMICS_NOTES) {
             validateSyllabus();
         }
     }
@@ -429,7 +489,7 @@ public class AcademicsUpload extends AppCompatActivity {
 
     public void uploadHomework(){
         long timeMillis = System.currentTimeMillis();
-        String fileName = teacherId + timeMillis + "_homework.png";
+        //String fileName = teacherId + timeMillis + "_homework.png";
         Map<String, String> params = new HashMap<>();
         params.put("status", "1");
         params.put("class_id", klassString);
@@ -595,7 +655,6 @@ public class AcademicsUpload extends AppCompatActivity {
         }
     }
 
-
     public class UploadFile2 extends AsyncTask<Void, Void, Boolean>//used in syllabus & notes
     {
         File file;
@@ -616,8 +675,9 @@ public class AcademicsUpload extends AppCompatActivity {
 
                 //Convert bitmap to byte array
                 ByteArrayOutputStream bos = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.PNG, 80 /*ignored for PNG*/, bos);
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100 /*ignored for PNG*/, bos);
                 byte[] bitmapdata = bos.toByteArray();
+                //bitmap.recycle();
 
                 //write the bytes in file
                 FileOutputStream fos = new FileOutputStream(f);
@@ -765,6 +825,4 @@ public class AcademicsUpload extends AppCompatActivity {
             }
         }
     }
-
-
 }

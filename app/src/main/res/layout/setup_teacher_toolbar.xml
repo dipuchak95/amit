@@ -36,8 +36,8 @@
 
             <ImageView
                 android:id="@+id/notification_click"
-                android:layout_width="@dimen/text_size24"
-                android:layout_height="@dimen/text_size24"
+                android:layout_width="@dimen/margin_24"
+                android:layout_height="@dimen/margin_24"
                 android:background="@drawable/ic_notifications_black_24dp"
                 android:backgroundTint="@color/tint_color"
                 android:scaleType="fitXY">

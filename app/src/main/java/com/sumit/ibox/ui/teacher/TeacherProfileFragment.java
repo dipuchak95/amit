@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sumit.ibox.R;
@@ -24,6 +25,7 @@ import com.sumit.ibox.model.Student;
 import com.sumit.ibox.model.Teacher;
 import com.sumit.ibox.ui.LoginActivity;
 import com.sumit.ibox.ui.faq.*;
+import com.sumit.ibox.ui.notification.Notification;
 
 import java.util.ArrayList;
 
@@ -38,6 +40,7 @@ public class TeacherProfileFragment extends Fragment {
     TextView tvStudentName;
     TextView askQuestionClickTeacher,suggestionTeacherClick,logout;
     ArrayList<Student> students;
+    ImageView notificationClick;
 
     public TeacherProfileFragment() {
         // Required empty public constructor
@@ -55,11 +58,21 @@ public class TeacherProfileFragment extends Fragment {
         }
 
         showProfileCard();
+        notificationClick.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent notificationIntent = new Intent(getContext(), Notification.class);
+                notificationIntent.putExtra(Constant.KEY_USER_TYPE, Constant.TYPE_TEACHER);
+                startActivity(notificationIntent);
+            }
+        });
+
         return view;
     }
 
     private void init(View view){
         context = getContext();
+        notificationClick = view.findViewById(R.id.notification_click);
         tvName = view.findViewById(R.id.teacher_profile_name);
         tvMail = view.findViewById(R.id.teacher_profile_mail);
         studentCard = view.findViewById(R.id.teacher_profile_student_card);

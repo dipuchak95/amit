@@ -19,6 +19,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         android:requestLegacyExternalStorage="true">
+
         <activity android:name=".ui.student.TeacherActivity" />
         <activity android:name=".ui.chat.ChatListActivity" />
         <activity android:name=".ui.chat.ChatActivity" />
@@ -48,7 +49,8 @@
         <activity android:name=".ui.student.result.ResultDetailsView" />
         <activity android:name=".ui.student.result.ResultList" />
         <activity android:name=".ui.student.homework.HomeWorkViewStudentMain" />
-        <activity android:name=".ui.teacher.AcademicsUpload" />
+        <activity android:name=".ui.teacher.AcademicsUpload"
+                  android:configChanges="orientation|screenSize|screenLayout"/>
         <activity android:name=".ui.teacher.TeacherMain" />
         <activity android:name=".ui.teacher.StudentsActivity" />
         <activity android:name=".ui.teacher.AttendanceActivity" />

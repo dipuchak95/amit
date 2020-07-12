@@ -2,6 +2,7 @@ package com.sumit.ibox.ui.teacher.teacher_schedule;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sumit.ibox.R;
@@ -23,6 +25,7 @@ import com.sumit.ibox.local.CookiesAdapter;
 import com.sumit.ibox.local.CookiesAttribute;
 import com.sumit.ibox.model.StudentRoutineData;
 import com.sumit.ibox.model.TeacherRoutineData;
+import com.sumit.ibox.ui.notification.Notification;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -50,6 +53,7 @@ public class TeacherRoutineFragment extends Fragment {
     Context context;
     RecyclerView teacherRoutineRecyclerView;
     TeacherRoutineAdapter teacherRoutineAdapter;
+    ImageView notificationClick;
 //    private List<TeacherRoutineData> teacherRoutineDataList = new ArrayList<>();
     private List<TeacherRoutineData> sundayList, mondayList, tuesdayList, wednesdayList, thursdayList, fridayList, saturdayList;
     private TextView sun, mon, tue, wed, thu, fri, sat;
@@ -128,11 +132,22 @@ public class TeacherRoutineFragment extends Fragment {
                 sat.performClick();
                 break;
         }
+
+        notificationClick.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent notificationIntent = new Intent(getContext(), Notification.class);
+                notificationIntent.putExtra(Constant.KEY_USER_TYPE, Constant.TYPE_TEACHER);
+                startActivity(notificationIntent);
+            }
+        });
         return view;
     }
 
     private void init(View view) {
         context = getContext();
+        notificationClick = view.findViewById(R.id.notification_click);
+
         sun = view.findViewById(R.id.teacher_routine_day_sun);
         sun.setOnClickListener(dayClicked);
         mon = view.findViewById(R.id.teacher_routine_day_mon);

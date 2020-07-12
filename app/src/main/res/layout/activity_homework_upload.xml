@@ -219,7 +219,7 @@
                                     android:background="@drawable/round_button"
                                     android:gravity="center"
                                     android:layout_gravity="center"
-                                    android:textSize="@dimen/text_size18"/>
+                                    android:textSize="@dimen/text_size22"/>
 
                                 <TextView
                                     android:id="@+id/homework_last_month_year"
