@@ -91,6 +91,13 @@ public class AskQuestionFaq extends AppCompatActivity {
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) getSupportActionBar().setTitle("Post Your Question");
         toolbar.setTitleTextColor(Color.WHITE);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.arrow_left);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }

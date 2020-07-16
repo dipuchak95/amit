@@ -133,6 +133,13 @@ public class FaqActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) getSupportActionBar().setTitle("FAQ");
         toolbar.setTitleTextColor(Color.WHITE);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.arrow_left);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }

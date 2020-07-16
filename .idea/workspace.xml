@@ -11,12 +11,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9d9a360c-f478-4c0e-af70-11fad82c8f3b" name="Default Changelist" comment="" />
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_2_API_29" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -38,8 +38,8 @@
         <option value="navigationResourceFile" />
         <option value="layoutResourceFile_vertical" />
         <option value="layoutResourceFile" />
-        <option value="resourceFile" />
         <option value="Class" />
+        <option value="resourceFile" />
       </list>
     </option>
   </component>
@@ -47,13 +47,23 @@
     <option name="BUILD_TARGET_KEY" value="apk" />
   </component>
   <component name="ProjectId" id="1YL2OlvGkQy3qTFz1VnRdb1Am5G" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
+  </component>
   <component name="PropertiesComponent">
-    <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="33911a750404" />
-    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-03-23T12:51:17.235Z" />
+    <property name="ApkExportedModule" value="app" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="Pixel_2_API_29" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-07-06T16:41:22.838Z" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SelectDeploymentTargetsDialog.selectedDevices" value="6577132&#10;emulator-5554&#10;Pixel_2_API_29" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="preferences.updates" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="memory.settings" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -90,18 +100,6 @@
     <key name="android.template.parentActivityClass">
       <recent name="" />
     </key>
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
   </component>
   <component name="RunManager" selected="Android App.app">
     <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
@@ -194,43 +192,79 @@
     </task>
     <servers />
   </component>
+  <component name="WindowStateProjectService">
+    <state x="395" y="87" width="800" height="686" key="#Notifications" timestamp="1594021685819">
+      <screen x="0" y="0" width="1600" height="852" />
+    </state>
+    <state x="395" y="87" width="800" height="686" key="#Notifications/0.0.1600.852@0.0.1600.852" timestamp="1594021685819" />
+    <state x="533" y="184" width="524" height="493" key="#com.intellij.codeInsight.editorActions.RestoreReferencesDialog" timestamp="1594123469697">
+      <screen x="0" y="0" width="1600" height="852" />
+    </state>
+    <state x="533" y="184" width="524" height="493" key="#com.intellij.codeInsight.editorActions.RestoreReferencesDialog/0.0.1600.852@0.0.1600.852" timestamp="1594123469697" />
+    <state x="1008" y="138" width="374" height="584" key="#com.intellij.ide.util.MemberChooser" timestamp="1594028404311">
+      <screen x="0" y="0" width="1600" height="852" />
+    </state>
+    <state x="1008" y="138" width="374" height="584" key="#com.intellij.ide.util.MemberChooser/0.0.1600.852@0.0.1600.852" timestamp="1594028404311" />
+    <state x="511" y="280" width="567" height="301" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1594033680107">
+      <screen x="0" y="0" width="1600" height="852" />
+    </state>
+    <state x="511" y="280" width="567" height="301" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1600.852@0.0.1600.852" timestamp="1594033680106" />
+    <state x="731" y="101" width="824" height="493" key="AndroidCreateResourceFileDialog" timestamp="1593850125972">
+      <screen x="0" y="0" width="1600" height="852" />
+    </state>
+    <state x="731" y="101" width="824" height="493" key="AndroidCreateResourceFileDialog/0.0.1600.852@0.0.1600.852" timestamp="1593850125972" />
+    <state x="1052" y="241" width="285" height="378" key="AndroidCreateXmlResourceDialog" timestamp="1593872795093">
+      <screen x="0" y="0" width="1600" height="852" />
+    </state>
+    <state x="1052" y="241" width="285" height="378" key="AndroidCreateXmlResourceDialog/0.0.1600.852@0.0.1600.852" timestamp="1593872795093" />
+    <state x="358" y="80" width="874" height="709" key="GradleDaemons" timestamp="1594021477071">
+      <screen x="0" y="0" width="1600" height="852" />
+    </state>
+    <state x="358" y="80" width="874" height="709" key="GradleDaemons/0.0.1600.852@0.0.1600.852" timestamp="1594021477071" />
+    <state width="779" height="167" key="GridCell.Tab.0.bottom" timestamp="1594479962208">
+      <screen x="0" y="0" width="1600" height="852" />
+    </state>
+    <state width="779" height="167" key="GridCell.Tab.0.bottom/0.0.1600.852@0.0.1600.852" timestamp="1594479962208" />
+    <state width="779" height="167" key="GridCell.Tab.0.center" timestamp="1594479962205">
+      <screen x="0" y="0" width="1600" height="852" />
+    </state>
+    <state width="779" height="167" key="GridCell.Tab.0.center/0.0.1600.852@0.0.1600.852" timestamp="1594479962205" />
+    <state width="779" height="167" key="GridCell.Tab.0.left" timestamp="1594479962204">
+      <screen x="0" y="0" width="1600" height="852" />
+    </state>
+    <state width="779" height="167" key="GridCell.Tab.0.left/0.0.1600.852@0.0.1600.852" timestamp="1594479962204" />
+    <state width="779" height="167" key="GridCell.Tab.0.right" timestamp="1594479962207">
+      <screen x="0" y="0" width="1600" height="852" />
+    </state>
+    <state width="779" height="167" key="GridCell.Tab.0.right/0.0.1600.852@0.0.1600.852" timestamp="1594479962207" />
+    <state x="100" y="100" width="1400" height="652" key="com.android.tools.idea.avdmanager.AvdListDialog" timestamp="1594049353229">
+      <screen x="0" y="0" width="1600" height="852" />
+    </state>
+    <state x="100" y="100" width="1400" height="652" key="com.android.tools.idea.avdmanager.AvdListDialog/0.0.1600.852@0.0.1600.852" timestamp="1594049353229" />
+    <state x="470" y="253" key="com.intellij.ide.util.TipDialog" timestamp="1594564201666">
+      <screen x="0" y="0" width="1600" height="852" />
+    </state>
+    <state x="470" y="253" key="com.intellij.ide.util.TipDialog/0.0.1600.852@0.0.1600.852" timestamp="1594564201666" />
+    <state x="540" y="280" width="663" height="506" key="find.popup" timestamp="1594049514303">
+      <screen x="0" y="0" width="1600" height="852" />
+    </state>
+    <state x="540" y="280" width="663" height="506" key="find.popup/0.0.1600.852@0.0.1600.852" timestamp="1594049514303" />
+    <state x="501" y="56" width="588" height="749" key="refactoring.ChangeSignatureDialog" timestamp="1593859130791">
+      <screen x="0" y="0" width="1600" height="852" />
+    </state>
+    <state x="501" y="56" width="588" height="749" key="refactoring.ChangeSignatureDialog/0.0.1600.852@0.0.1600.852" timestamp="1593859130791" />
+    <state x="390" y="92" width="800" height="686" key="scopes" timestamp="1593842760409">
+      <screen x="0" y="0" width="1600" height="852" />
+    </state>
+    <state x="390" y="92" width="800" height="686" key="scopes/0.0.1600.852@0.0.1600.852" timestamp="1593842760409" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/sumit/ibox/ui/teacher/AcademicsUpload.java</url>
-          <line>362</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/sumit/ibox/ui/teacher/AcademicsUpload.java</url>
-          <line>415</line>
+          <line>475</line>
           <option name="timeStamp" value="13" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/sumit/ibox/ui/teacher/AcademicsUpload.java</url>
-          <line>324</line>
-          <option name="timeStamp" value="15" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/sumit/ibox/ui/teacher/AcademicsUpload.java</url>
-          <line>326</line>
-          <option name="timeStamp" value="16" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/sumit/ibox/ui/teacher/AcademicsUpload.java</url>
-          <line>327</line>
-          <option name="timeStamp" value="17" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/sumit/ibox/ui/teacher/AcademicsUpload.java</url>
-          <line>328</line>
-          <option name="timeStamp" value="18" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/sumit/ibox/ui/teacher/AcademicsUpload.java</url>
-          <line>340</line>
-          <option name="timeStamp" value="19" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/sumit/ibox/ui/teacher/AttendanceActivity.java</url>
@@ -269,12 +303,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/sumit/ibox/ui/teacher/AcademicsUpload.java</url>
-          <line>400</line>
+          <line>460</line>
           <option name="timeStamp" value="27" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/sumit/ibox/ui/teacher/AcademicsUpload.java</url>
-          <line>399</line>
+          <line>459</line>
           <option name="timeStamp" value="28" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -291,11 +325,6 @@
           <url>file://$PROJECT_DIR$/app/src/main/java/com/sumit/ibox/model/AlertDialog.java</url>
           <line>49</line>
           <option name="timeStamp" value="32" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/sumit/ibox/ui/teacher/AcademicsUpload.java</url>
-          <line>350</line>
-          <option name="timeStamp" value="33" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/sumit/ibox/ui/teacher/TeacherDashboardFragment.java</url>
